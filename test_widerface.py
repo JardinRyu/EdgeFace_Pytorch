@@ -131,8 +131,8 @@ if __name__ == '__main__':
         img = np.float32(img_raw)
 
         # testing scale
-        target_size = 1600
-        max_size = 2150
+        target_size = 1024
+        max_size = 1920
         im_shape = img.shape
         #print(im_shape[0:2])
         im_size_min = np.min(im_shape[0:2])
