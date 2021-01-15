@@ -5,13 +5,13 @@ import torch.optim as optim
 import torch.backends.cudnn as cudnn
 import argparse
 import torch.utils.data as data
-from data import WiderFaceDetection, detection_collate, preproc, cfg_mnet, cfg_re50, cfg_mnetv2, cfg_egnet
+from data import WiderFaceDetection, detection_collate, preproc, cfg_EdgeFace
 from layers.modules import MultiBoxLoss
 from layers.functions.prior_box import PriorBox
 import time
 import datetime
 import math
-from models.retinaface import RetinaFace
+from models.edgeface import Edgeface
 
 parser = argparse.ArgumentParser(description='Retinaface Training')
 parser.add_argument('--training_dataset', default='./data/widerface/train/label.txt', help='Training dataset directory')
@@ -29,15 +29,7 @@ args = parser.parse_args()
 
 if not os.path.exists(args.save_folder):
     os.mkdir(args.save_folder)
-cfg = None
-if args.network == "mobile0.25":
-    cfg = cfg_mnet
-elif args.network == "resnet50":
-    cfg = cfg_re50
-elif args.network == "mobilev2":
-    cfg = cfg_mnetv2
-elif args.network == "edgenet":
-    cfg = cfg_egnet
+cfg = cfg_EdgeFace
 
 rgb_mean = (104, 117, 123) # bgr order
 num_classes = 2
@@ -55,7 +47,7 @@ gamma = args.gamma
 training_dataset = args.training_dataset
 save_folder = args.save_folder
 
-net = RetinaFace(cfg=cfg)
+net = Edgeface(cfg=cfg)
 #print("Printing net...")
 #print(net)
 
@@ -112,7 +104,7 @@ def train():
         if iteration % epoch_size == 0:
             # create batch iterator
             batch_iterator = iter(data.DataLoader(dataset, batch_size, shuffle=True, num_workers=num_workers, collate_fn=detection_collate))
-            if (epoch % 10 == 0 and epoch > 0) or (epoch % 5 == 0 and epoch > cfg['decay1']):
+            if (epoch % 10 == 0 and epoch > 0):
                 torch.save(net.state_dict(), save_folder + cfg['name']+ '_epoch_' + str(epoch) + '.pth')
             epoch += 1
 
@@ -143,8 +135,7 @@ def train():
               epoch_size, iteration + 1, max_iter, loss_l.item(), loss_c.item(), loss_landm.item(), lr, batch_time, str(datetime.timedelta(seconds=eta))))
 
     torch.save(net.state_dict(), save_folder + cfg['name'] + '_Final.pth')
-    # torch.save(net.state_dict(), save_folder + 'Final_Retinaface.pth')
-
+    
 
 def adjust_learning_rate(optimizer, gamma, epoch, step_index, iteration, epoch_size):
     """Sets the learning rate
