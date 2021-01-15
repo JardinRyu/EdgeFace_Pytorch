@@ -195,6 +195,7 @@ setting4 = [[2, 64, 2, 2]]
 
 setting5 = [[2, 64, 6, 2]]
 
+
 class EdgeFacenet(nn.Module):
     def __init__(self):
         super(EdgeFacenet, self).__init__()
@@ -204,15 +205,15 @@ class EdgeFacenet(nn.Module):
             ConvBlock(64, 64, 3, 1, 1, dw=True),
             _make_layer(Bottleneck, 64, setting1),
             _make_layer(Bottleneck, 64, setting2),
-            _make_layer(Bottleneck, 64, setting2_2)
+            _make_layer(Bottleneck, 64, setting2_2),
         )
         self.stage2 = nn.Sequential(
             _make_layer(Bottleneck, 64, setting3),
             _make_layer(Bottleneck, 64, setting4)
         )
         self.stage3 = nn.Sequential(
-            _make_layer(Bottleneck, 64, setting5)            
-        )        
+            _make_layer(Bottleneck, 64, setting5)
+        )
 
     def forward(self, x):
         x = self.stage1(x)
