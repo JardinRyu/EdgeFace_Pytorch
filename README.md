@@ -1,15 +1,12 @@
 # EdgeFace_Pytorch
 Official EdgeFace Pytorch code
-
 <p align="center"><img src="data/result.png" width="640"\></p>
 
-## WiderFace Val Performance in single scale
-| Style | easy | medium | hard |
+## WiderFace Val Performance
+| Model | easy | medium | hard |
 |:-|:-:|:-:|:-:|
-| Pytorch (same parameter with Mxnet) | 94.82 % | 93.84% | 89.60% |
-| Pytorch (original image scale) | 95.48% | 94.04% | 84.43% |
-| Mxnet | 94.86% | 93.87% | 88.33% |
-| Mxnet(original image scale) | 94.97% | 93.89% | 82.27% |
+| EdgeFace | 90.5 % | 89.8% | 83.8% |
+
 
 ## Installation
 ##### Clone and install
