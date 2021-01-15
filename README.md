@@ -5,7 +5,7 @@ Official EdgeFace Pytorch code
 ## WiderFace Val Performance
 | Model | easy | medium | hard |
 |:-|:-:|:-:|:-:|
-| EdgeFace | 90.5 % | 89.8% | 83.8% |
+| EdgeFace | 90.76% | 90.04% | 83.99% |
 
 
 ## Installation
