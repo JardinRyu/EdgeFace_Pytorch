@@ -44,13 +44,13 @@ class LandmarkHead(nn.Module):
 
         return out.view(out.shape[0], -1, 10)
 
-class RetinaFace(nn.Module):
+class Edgeface(nn.Module):
     def __init__(self, cfg = None, phase = 'train'):
         """
         :param cfg:  Network related settings.
         :param phase: train or test.
         """
-        super(RetinaFace,self).__init__()
+        super(Edgeface,self).__init__()
         self.phase = phase
         backbone = EdgeFacenet()
         self.body = _utils.IntermediateLayerGetter(backbone, cfg['return_layers'])
