@@ -1,6 +1,6 @@
 # EdgeFace_Pytorch
 Official EdgeFace Pytorch code
-<p align="center"><img src="data/result.png" width="640"\></p>
+<p align="center"><img src="data/result.png" width=\linewidth\></p>
 
 ## WiderFace Val Performance
 | Model | easy | medium | hard |
