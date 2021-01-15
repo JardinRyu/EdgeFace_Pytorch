@@ -13,10 +13,10 @@ from utils.box_utils import decode, decode_landm
 from utils.timer import Timer
 
 
-parser = argparse.ArgumentParser(description='Retinaface')
-parser.add_argument('-m', '--trained_model', default='./weights/Resnet50_Final.pth',
+parser = argparse.ArgumentParser(description='Edgeface')
+parser.add_argument('-m', '--trained_model', default='./weights/EdgeFaceNet_Final.pth',
                     type=str, help='Trained state_dict file path to open')
-parser.add_argument('--origin_size', default=True, type=str, help='Whether use origin image size to evaluate')
+parser.add_argument('--origin_size', default=False, type=str, help='Whether use origin image size to evaluate')
 parser.add_argument('--save_folder', default='./widerface_evaluate/widerface_txt/', type=str, help='Dir to save txt results')
 parser.add_argument('--cpu', action="store_true", default=False, help='Use cpu inference')
 parser.add_argument('--dataset_folder', default='./data/widerface/val/images/', type=str, help='dataset path')
